@@ -1,0 +1,68 @@
+name: cookieApiHome
+version: ${project.version}
+description: Homeplugin
+authors: [Kekshaus]
+main: de.kekshaus.cookieApi.home.Homeplugin
+
+commands:
+  sethome:
+    description: Set your home.
+  home:
+    description: Teleport back to your set home.
+  homes:
+    description: Get Homelist.
+  delhome:
+    description: Delete a home
+
+permissions:
+    cookieApi.home.team:
+        description: Alle Permissions
+        children:
+            cookieApi.home.limit.admin: true
+            cookieApi.home.user: true
+    cookieApi.home.user:
+        description: Alle User Permissions
+        children:
+            cookieApi.home.home: true
+            cookieApi.home.sethome: true
+            cookieApi.home.homes: true
+            cookieApi.home.delhome: true
+    cookieApi.home.home:
+        description: Teleport to home
+        default: op
+    cookieApi.home.sethome:
+        description: Teleport to home
+        default: op
+    cookieApi.home.homes:
+        description: Teleport to home
+        default: op
+    cookieApi.home.delhome:
+        description: Teleport to home
+        default: op
+    cookieApi.home.limit.admin:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.2:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.3:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.4:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.5:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.6:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.7:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.8:
+        description: Homes limit
+        default: op
+    cookieApi.home.limit.9:
+        description: Homes limit
+        default: op
