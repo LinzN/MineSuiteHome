@@ -1,9 +1,7 @@
 package de.kekshaus.cookieApi.home;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
 import de.kekshaus.cookieApi.home.commands.DeleteHomeCommand;
 import de.kekshaus.cookieApi.home.commands.HomeCommand;
 import de.kekshaus.cookieApi.home.commands.HomeListCommand;
