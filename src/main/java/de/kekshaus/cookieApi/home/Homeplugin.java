@@ -7,6 +7,8 @@ import de.kekshaus.cookieApi.home.commands.HomeCommand;
 import de.kekshaus.cookieApi.home.commands.HomeListCommand;
 import de.kekshaus.cookieApi.home.commands.SetHomeCommand;
 import de.kekshaus.cookieApi.home.database.MineHomeDB;
+import de.kekshaus.cookieApi.home.listener.BukkitSockHomeListener;
+import de.kekshaus.cookieApi.home.listener.HomeListener;
 
 public class Homeplugin extends JavaPlugin {
 	private static Homeplugin inst;
@@ -18,6 +20,8 @@ public class Homeplugin extends JavaPlugin {
 			// someting
 		}
 		loadCommands();
+		getServer().getPluginManager().registerEvents(new BukkitSockHomeListener(), this);
+		getServer().getPluginManager().registerEvents(new HomeListener(), this);
 	}
 
 	public void onDisable() {

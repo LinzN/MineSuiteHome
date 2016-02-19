@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 
 import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
 import de.kekshaus.cookieApi.bukkit.MessageDB;
-import de.kekshaus.cookieApi.bukkit.managerApi.HomeApi;
-import de.kekshaus.cookieApi.bukkit.managerApi.OtherApi;
 import de.kekshaus.cookieApi.home.Homeplugin;
+import de.kekshaus.cookieApi.home.api.HOStreamOutApi;
 import de.kekshaus.cookieApi.home.database.ConnectionInject;
+import de.kekshaus.cookieApi.home.database.HomeHASHDB;
 import net.md_5.bungee.api.ChatColor;
 
 public class HomeCommand implements CommandExecutor {
@@ -41,7 +41,7 @@ public class HomeCommand implements CommandExecutor {
 
 						if (ConnectionInject.isHome(player.getUniqueId(), homeName)) {
 							if (!player.hasPermission("cookieApi.bypass")) {
-								OtherApi.lastLocation.put(player, player.getLocation());
+								HomeHASHDB.lastHomeLocation.put(player, player.getLocation());
 								player.sendMessage(MessageDB.TELEPORT_TIMER.replace("{TIME}",
 										String.valueOf(CookieApiBukkit.getWarmUpTime())));
 								Homeplugin.inst().getServer().getScheduler().runTaskLater(Homeplugin.inst(),
@@ -52,8 +52,8 @@ public class HomeCommand implements CommandExecutor {
 										if ((args.length == 1)) {
 											homelName = args[0].toLowerCase();
 										}
-										Location loc = OtherApi.lastLocation.get(player);
-										OtherApi.lastLocation.remove(player);
+										Location loc = HomeHASHDB.lastHomeLocation.get(player);
+										HomeHASHDB.lastHomeLocation.remove(player);
 										if ((loc != null) && (loc.getBlock().equals(player.getLocation().getBlock()))) {
 											List<String> list = ConnectionInject.getHome(player.getUniqueId(),
 													homelName);
@@ -64,8 +64,8 @@ public class HomeCommand implements CommandExecutor {
 											double z = Double.parseDouble(list.get(5));
 											float yaw = Float.parseFloat(list.get(6));
 											float pitch = Float.parseFloat(list.get(7));
-											HomeApi.sendTeleportToHomeOut(player.getName(), server, world, x, y, z, yaw,
-													pitch);
+											HOStreamOutApi.sendTeleportToHomeOut(player.getName(), server, world, x, y,
+													z, yaw, pitch);
 											return;
 										} else {
 											player.sendMessage(MessageDB.TELEPORT_MOVE_CANCEL);
@@ -82,7 +82,8 @@ public class HomeCommand implements CommandExecutor {
 								double z = Double.parseDouble(list.get(5));
 								float yaw = Float.parseFloat(list.get(6));
 								float pitch = Float.parseFloat(list.get(7));
-								HomeApi.sendTeleportToHomeOut(player.getName(), server, world, x, y, z, yaw, pitch);
+								HOStreamOutApi.sendTeleportToHomeOut(player.getName(), server, world, x, y, z, yaw,
+										pitch);
 								return;
 
 							}
