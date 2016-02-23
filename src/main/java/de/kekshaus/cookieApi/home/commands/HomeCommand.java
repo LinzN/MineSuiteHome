@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
-import de.kekshaus.cookieApi.bukkit.MessageDB;
+import de.kekshaus.cookieApi.bukkit.GlobalMessageDB;
 import de.kekshaus.cookieApi.home.Homeplugin;
 import de.kekshaus.cookieApi.home.api.HOStreamOutApi;
 import de.kekshaus.cookieApi.home.database.ConnectionInject;
@@ -42,7 +42,7 @@ public class HomeCommand implements CommandExecutor {
 						if (ConnectionInject.isHome(player.getUniqueId(), homeName)) {
 							if (!player.hasPermission("cookieApi.bypass")) {
 								HomeHASHDB.lastHomeLocation.put(player, player.getLocation());
-								player.sendMessage(MessageDB.TELEPORT_TIMER.replace("{TIME}",
+								player.sendMessage(GlobalMessageDB.TELEPORT_TIMER.replace("{TIME}",
 										String.valueOf(CookieApiBukkit.getWarmUpTime())));
 								Homeplugin.inst().getServer().getScheduler().runTaskLater(Homeplugin.inst(),
 										new Runnable() {
@@ -68,7 +68,7 @@ public class HomeCommand implements CommandExecutor {
 													z, yaw, pitch);
 											return;
 										} else {
-											player.sendMessage(MessageDB.TELEPORT_MOVE_CANCEL);
+											player.sendMessage(GlobalMessageDB.TELEPORT_MOVE_CANCEL);
 
 										}
 									}
@@ -96,7 +96,7 @@ public class HomeCommand implements CommandExecutor {
 				}
 			});
 		} else {
-			sender.sendMessage(MessageDB.NO_PERMISSIONS);
+			sender.sendMessage(GlobalMessageDB.NO_PERMISSIONS);
 		}
 		return false;
 	}

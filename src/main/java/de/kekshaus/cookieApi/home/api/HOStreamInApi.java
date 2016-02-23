@@ -7,7 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
-import de.kekshaus.cookieApi.bukkit.MessageDB;
+import de.kekshaus.cookieApi.bukkit.GlobalMessageDB;
 import de.kekshaus.cookieApi.bukkit.utils.LocationUtil;
 import de.kekshaus.cookieApi.home.database.HomeHASHDB;
 
@@ -33,7 +33,7 @@ public class HOStreamInApi {
 					Location l = LocationUtil.getSafeDestination(p, t);
 					if (l != null) {
 						p.teleport(l);
-						p.sendMessage(MessageDB.Teleport_Home);
+						p.sendMessage(GlobalMessageDB.Teleport_Home);
 						return;
 					} else {
 						p.sendMessage(ChatColor.RED + "Unable to find a safe location for teleport.");
@@ -43,7 +43,7 @@ public class HOStreamInApi {
 				}
 			} else {
 				p.teleport(t);
-				p.sendMessage(MessageDB.Teleport_Home);
+				p.sendMessage(GlobalMessageDB.Teleport_Home);
 				return;
 			}
 

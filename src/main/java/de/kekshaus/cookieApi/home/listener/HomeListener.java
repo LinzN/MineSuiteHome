@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
-import de.kekshaus.cookieApi.bukkit.MessageDB;
+import de.kekshaus.cookieApi.bukkit.GlobalMessageDB;
 import de.kekshaus.cookieApi.home.database.HomeHASHDB;
 
 public class HomeListener implements Listener {
@@ -38,7 +38,7 @@ public class HomeListener implements Listener {
 			@Override
 			public void run() {
 				HomeHASHDB.ignoreHome.remove(p);
-				p.sendMessage(MessageDB.Teleport_Home);
+				p.sendMessage(GlobalMessageDB.Teleport_Home);
 			}
 		}, 20);
 
