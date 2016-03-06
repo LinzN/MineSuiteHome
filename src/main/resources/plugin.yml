@@ -3,6 +3,8 @@ version: ${project.version}
 description: Homeplugin
 authors: [Kekshaus]
 main: de.kekshaus.cookieApi.home.Homeplugin
+load: POSTWORLD
+depend: [CookieApiBukkit]
 
 commands:
   sethome:
