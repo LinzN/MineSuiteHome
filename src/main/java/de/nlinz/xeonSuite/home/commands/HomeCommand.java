@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.home.commands;
+package de.nlinz.xeonSuite.home.commands;
 
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -11,12 +11,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
-import de.kekshaus.cookieApi.bukkit.GlobalMessageDB;
-import de.kekshaus.cookieApi.home.Homeplugin;
-import de.kekshaus.cookieApi.home.api.HOStreamOutApi;
-import de.kekshaus.cookieApi.home.database.ConnectionInject;
-import de.kekshaus.cookieApi.home.database.HomeHASHDB;
+import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
+import de.nlinz.xeonSuite.home.Homeplugin;
+import de.nlinz.xeonSuite.home.api.HOStreamOutApi;
+import de.nlinz.xeonSuite.home.database.ConnectionInject;
+import de.nlinz.xeonSuite.home.database.HomeHASHDB;
 import net.md_5.bungee.api.ChatColor;
 
 public class HomeCommand implements CommandExecutor {
@@ -43,7 +43,7 @@ public class HomeCommand implements CommandExecutor {
 							if (!player.hasPermission("cookieApi.bypass")) {
 								HomeHASHDB.lastHomeLocation.put(player, player.getLocation());
 								player.sendMessage(GlobalMessageDB.TELEPORT_TIMER.replace("{TIME}",
-										String.valueOf(CookieApiBukkit.getWarmUpTime())));
+										String.valueOf(XeonSuiteBukkit.getWarmUpTime())));
 								Homeplugin.inst().getServer().getScheduler().runTaskLater(Homeplugin.inst(),
 										new Runnable() {
 									@Override
@@ -72,7 +72,7 @@ public class HomeCommand implements CommandExecutor {
 
 										}
 									}
-								}, 20L * CookieApiBukkit.getWarmUpTime());
+								}, 20L * XeonSuiteBukkit.getWarmUpTime());
 							} else {
 								List<String> list = ConnectionInject.getHome(player.getUniqueId(), homeName);
 								String world = list.get(1);

@@ -1,10 +1,10 @@
-name: cookieApiHome
+name: XeonSuiteHome
 version: ${project.version}.b${build.number}
 description: Homeplugin
 authors: [Kekshaus]
-main: de.kekshaus.cookieApi.home.Homeplugin
+main: de.nlinz.xeonSuite.home.Homeplugin
 load: POSTWORLD
-depend: [cookieApiBukkit]
+depend: [XeonSuiteBukkit]
 
 commands:
   sethome:

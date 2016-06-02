@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.home.api;
+package de.nlinz.xeonSuite.home.api;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,10 +6,10 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
-import de.kekshaus.cookieApi.bukkit.GlobalMessageDB;
-import de.kekshaus.cookieApi.bukkit.utils.LocationUtil;
-import de.kekshaus.cookieApi.home.database.HomeHASHDB;
+import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
+import de.nlinz.xeonSuite.bukkit.utils.LocationUtil;
+import de.nlinz.xeonSuite.home.database.HomeHASHDB;
 
 public class HOStreamInApi {
 
@@ -52,7 +52,7 @@ public class HOStreamInApi {
 			HomeHASHDB.pendingHomeLocations.put(player, t);
 
 			// clear pending teleport if they dont connect
-			Bukkit.getScheduler().runTaskLaterAsynchronously(CookieApiBukkit.getInstance(), new Runnable() {
+			Bukkit.getScheduler().runTaskLaterAsynchronously(XeonSuiteBukkit.getInstance(), new Runnable() {
 				@Override
 				public void run() {
 					if (HomeHASHDB.pendingHomeLocations.containsKey(player)) {

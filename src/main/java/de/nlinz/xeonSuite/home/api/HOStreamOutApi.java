@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.home.api;
+package de.nlinz.xeonSuite.home.api;
 
 import de.keks.socket.bukkit.BukkitPlugin;
 import de.keks.socket.core.Channel;

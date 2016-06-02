@@ -1,4 +1,4 @@
-package de.kekshaus.cookieApi.home.database;
+package de.nlinz.xeonSuite.home.database;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -6,8 +6,8 @@ import java.sql.Statement;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
-import de.kekshaus.cookieApi.bukkit.CookieApiBukkit;
-import de.kekshaus.cookieApi.home.Homeplugin;
+import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.home.Homeplugin;
 
 public class MineHomeDB {
 	public static boolean create() {
@@ -16,12 +16,12 @@ public class MineHomeDB {
 	}
 
 	public static boolean mysql() {
-		String db = CookieApiBukkit.getDataBase();
-		String port = CookieApiBukkit.getPort();
-		String host = CookieApiBukkit.getHost();
+		String db = XeonSuiteBukkit.getDataBase();
+		String port = XeonSuiteBukkit.getPort();
+		String host = XeonSuiteBukkit.getHost();
 		String url = "jdbc:mysql://" + host + ":" + port + "/" + db;
-		String username = CookieApiBukkit.getUsername();
-		String password = CookieApiBukkit.getPassword();
+		String username = XeonSuiteBukkit.getUsername();
+		String password = XeonSuiteBukkit.getPassword();
 		ConnectionFactory factory = new ConnectionFactory(url, username, password);
 		ConnectionManager manager = ConnectionManager.DEFAULT;
 		ConnectionHandler handler = manager.getHandler("minehome", factory);
@@ -42,7 +42,7 @@ public class MineHomeDB {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Unable to connect to database.");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Pls check you mysql connection in config.yml.");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "==================HOME-ERROR================");
-			if (CookieApiBukkit.isDebugmode()) {
+			if (XeonSuiteBukkit.isDebugmode()) {
 				e.printStackTrace();
 			}
 			return false;

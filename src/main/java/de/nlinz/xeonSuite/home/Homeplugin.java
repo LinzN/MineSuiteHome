@@ -1,14 +1,14 @@
-package de.kekshaus.cookieApi.home;
+package de.nlinz.xeonSuite.home;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.kekshaus.cookieApi.home.commands.DeleteHomeCommand;
-import de.kekshaus.cookieApi.home.commands.HomeCommand;
-import de.kekshaus.cookieApi.home.commands.HomeListCommand;
-import de.kekshaus.cookieApi.home.commands.SetHomeCommand;
-import de.kekshaus.cookieApi.home.database.MineHomeDB;
-import de.kekshaus.cookieApi.home.listener.BukkitSockHomeListener;
-import de.kekshaus.cookieApi.home.listener.HomeListener;
+import de.nlinz.xeonSuite.home.commands.DeleteHomeCommand;
+import de.nlinz.xeonSuite.home.commands.HomeCommand;
+import de.nlinz.xeonSuite.home.commands.HomeListCommand;
+import de.nlinz.xeonSuite.home.commands.SetHomeCommand;
+import de.nlinz.xeonSuite.home.database.MineHomeDB;
+import de.nlinz.xeonSuite.home.listener.BukkitSockHomeListener;
+import de.nlinz.xeonSuite.home.listener.HomeListener;
 
 public class Homeplugin extends JavaPlugin {
 	private static Homeplugin inst;
