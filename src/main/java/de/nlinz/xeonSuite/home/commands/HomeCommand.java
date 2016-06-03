@@ -12,11 +12,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.bukkit.utils.tables.HomeDataTable;
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.home.Homeplugin;
 import de.nlinz.xeonSuite.home.api.HOStreamOutApi;
 import de.nlinz.xeonSuite.home.database.HomeSqlActions;
-import de.nlinz.xeonSuite.home.database.HomeDataTable;
 import net.md_5.bungee.api.ChatColor;
 
 public class HomeCommand implements CommandExecutor {

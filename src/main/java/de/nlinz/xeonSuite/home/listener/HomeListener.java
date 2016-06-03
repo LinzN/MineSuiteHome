@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.bukkit.utils.tables.HomeDataTable;
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
-import de.nlinz.xeonSuite.home.database.HomeDataTable;
 
 public class HomeListener implements Listener {
 
