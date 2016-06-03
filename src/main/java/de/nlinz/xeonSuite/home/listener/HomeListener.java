@@ -9,25 +9,25 @@ import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
-import de.nlinz.xeonSuite.home.database.HomeHASHDB;
+import de.nlinz.xeonSuite.home.database.HomeDataTable;
 
 public class HomeListener implements Listener {
 
 	@EventHandler
 	public void playerConnect(PlayerSpawnLocationEvent e) {
-		if (HomeHASHDB.pendingHome.containsKey(e.getPlayer().getName())) {
-			Player t = HomeHASHDB.pendingHome.get(e.getPlayer().getName());
-			HomeHASHDB.pendingHome.remove(e.getPlayer().getName());
+		if (HomeDataTable.pendingHome.containsKey(e.getPlayer().getName())) {
+			Player t = HomeDataTable.pendingHome.get(e.getPlayer().getName());
+			HomeDataTable.pendingHome.remove(e.getPlayer().getName());
 			if ((t == null) || (!t.isOnline())) {
 				e.getPlayer().sendMessage("Player is no longer online");
 				return;
 			}
-			HomeHASHDB.ignoreHome.add(e.getPlayer());
+			HomeDataTable.ignoreHome.add(e.getPlayer());
 			e.setSpawnLocation(t.getLocation());
 			sendWarpMSG(e.getPlayer());
-		} else if (HomeHASHDB.pendingHomeLocations.containsKey(e.getPlayer().getName())) {
-			Location l = HomeHASHDB.pendingHomeLocations.get(e.getPlayer().getName());
-			HomeHASHDB.ignoreHome.add(e.getPlayer());
+		} else if (HomeDataTable.pendingHomeLocations.containsKey(e.getPlayer().getName())) {
+			Location l = HomeDataTable.pendingHomeLocations.get(e.getPlayer().getName());
+			HomeDataTable.ignoreHome.add(e.getPlayer());
 			e.setSpawnLocation(l);
 			sendWarpMSG(e.getPlayer());
 		}
@@ -37,7 +37,7 @@ public class HomeListener implements Listener {
 		Bukkit.getScheduler().runTaskLaterAsynchronously(XeonSuiteBukkit.getInstance(), new Runnable() {
 			@Override
 			public void run() {
-				HomeHASHDB.ignoreHome.remove(p);
+				HomeDataTable.ignoreHome.remove(p);
 				p.sendMessage(GlobalMessageDB.Teleport_Home);
 			}
 		}, 20);

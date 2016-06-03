@@ -15,8 +15,8 @@ import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.home.Homeplugin;
 import de.nlinz.xeonSuite.home.api.HOStreamOutApi;
-import de.nlinz.xeonSuite.home.database.ConnectionInject;
-import de.nlinz.xeonSuite.home.database.HomeHASHDB;
+import de.nlinz.xeonSuite.home.database.HomeSqlActions;
+import de.nlinz.xeonSuite.home.database.HomeDataTable;
 import net.md_5.bungee.api.ChatColor;
 
 public class HomeCommand implements CommandExecutor {
@@ -39,9 +39,9 @@ public class HomeCommand implements CommandExecutor {
 							homeName = args[0].toLowerCase();
 						}
 
-						if (ConnectionInject.isHome(player.getUniqueId(), homeName)) {
+						if (HomeSqlActions.isHome(player.getUniqueId(), homeName)) {
 							if (!player.hasPermission("cookieApi.bypass")) {
-								HomeHASHDB.lastHomeLocation.put(player, player.getLocation());
+								HomeDataTable.lastHomeLocation.put(player, player.getLocation());
 								player.sendMessage(GlobalMessageDB.TELEPORT_TIMER.replace("{TIME}",
 										String.valueOf(XeonSuiteBukkit.getWarmUpTime())));
 								Homeplugin.inst().getServer().getScheduler().runTaskLater(Homeplugin.inst(),
@@ -52,10 +52,10 @@ public class HomeCommand implements CommandExecutor {
 										if ((args.length == 1)) {
 											homelName = args[0].toLowerCase();
 										}
-										Location loc = HomeHASHDB.lastHomeLocation.get(player);
-										HomeHASHDB.lastHomeLocation.remove(player);
+										Location loc = HomeDataTable.lastHomeLocation.get(player);
+										HomeDataTable.lastHomeLocation.remove(player);
 										if ((loc != null) && (loc.getBlock().equals(player.getLocation().getBlock()))) {
-											List<String> list = ConnectionInject.getHome(player.getUniqueId(),
+											List<String> list = HomeSqlActions.getHome(player.getUniqueId(),
 													homelName);
 											String world = list.get(1);
 											String server = list.get(2);
@@ -74,7 +74,7 @@ public class HomeCommand implements CommandExecutor {
 									}
 								}, 20L * XeonSuiteBukkit.getWarmUpTime());
 							} else {
-								List<String> list = ConnectionInject.getHome(player.getUniqueId(), homeName);
+								List<String> list = HomeSqlActions.getHome(player.getUniqueId(), homeName);
 								String world = list.get(1);
 								String server = list.get(2);
 								double x = Double.parseDouble(list.get(3));

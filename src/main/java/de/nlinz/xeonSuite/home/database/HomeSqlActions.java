@@ -9,13 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class ConnectionInject {
+import de.nlinz.xeonSuite.bukkit.database.XeonConnectionManager;
+
+public class HomeSqlActions {
 
 	public static void setHome(UUID uuid, String home, String server, String world, double x, double y, double z,
 			float yaw, float pitch) {
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		XeonConnectionManager manager = XeonConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("minehome");
+			Connection conn = manager.getConnection("XeonSuite");
 			PreparedStatement sql = conn.prepareStatement("SELECT home_name FROM homes WHERE player = '"
 					+ uuid.toString().replace("-", "") + "' AND home_name = '" + home + "';");
 			ResultSet result = sql.executeQuery();
@@ -36,7 +38,7 @@ public class ConnectionInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("minehome", conn);
+			manager.release("XeonSuite", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -44,9 +46,9 @@ public class ConnectionInject {
 	}
 
 	public static void delHome(UUID uuid, String home) {
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		XeonConnectionManager manager = XeonConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("minehome");
+			Connection conn = manager.getConnection("XeonSuite");
 			PreparedStatement sql = conn.prepareStatement("SELECT home_name FROM homes WHERE player = '"
 					+ uuid.toString().replace("-", "") + "' AND home_name = '" + home + "';");
 			ResultSet result = sql.executeQuery();
@@ -58,7 +60,7 @@ public class ConnectionInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("minehome", conn);
+			manager.release("XeonSuite", conn);
 
 		}
 
@@ -70,9 +72,9 @@ public class ConnectionInject {
 	public static List<String> getHome(UUID uuid, String home) {
 		final List<String> rlist = new ArrayList<String>();
 
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		XeonConnectionManager manager = XeonConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("minehome");
+			Connection conn = manager.getConnection("XeonSuite");
 			PreparedStatement sql = conn
 					.prepareStatement("SELECT world, server, x, y, z, yaw, pitch FROM homes WHERE player = '"
 							+ uuid.toString().replace("-", "") + "' AND home_name = '" + home + "';");
@@ -86,15 +88,12 @@ public class ConnectionInject {
 				rlist.add(5, result.getString(5));
 				rlist.add(6, result.getString(6));
 				rlist.add(7, result.getString(7));
-				result.close();
-				sql.close();
-				manager.release("minehome", conn);
-			} else {
-				result.close();
-				sql.close();
-				manager.release("minehome", conn);
-				return null;
+
 			}
+			result.close();
+			sql.close();
+			manager.release("XeonSuite", conn);
+
 			return rlist;
 
 		} catch (SQLException e) {
@@ -105,9 +104,9 @@ public class ConnectionInject {
 
 	public static boolean isHome(UUID uuid, String home) {
 		boolean ishome = false;
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		XeonConnectionManager manager = XeonConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("minehome");
+			Connection conn = manager.getConnection("XeonSuite");
 			PreparedStatement sql = conn.prepareStatement("SELECT home_name FROM homes WHERE player = '"
 					+ uuid.toString().replace("-", "") + "' AND home_name = '" + home + "';");
 			ResultSet result = sql.executeQuery();
@@ -118,7 +117,7 @@ public class ConnectionInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("minehome", conn);
+			manager.release("XeonSuite", conn);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -127,10 +126,10 @@ public class ConnectionInject {
 	}
 
 	public static HashMap<String, String> getHomes(UUID uuid) {
-		ConnectionManager manager = ConnectionManager.DEFAULT;
+		XeonConnectionManager manager = XeonConnectionManager.DEFAULT;
 		try {
 
-			Connection conn = manager.getConnection("minehome");
+			Connection conn = manager.getConnection("XeonSuite");
 			PreparedStatement sel = conn
 					.prepareStatement("SELECT * FROM homes WHERE player = '" + uuid.toString().replace("-", "") + "';");
 			HashMap<String, String> list = new HashMap<String, String>();
@@ -146,7 +145,7 @@ public class ConnectionInject {
 				}
 				result.close();
 				sel.close();
-				manager.release("minehome", conn);
+				manager.release("XeonSuite", conn);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return null;

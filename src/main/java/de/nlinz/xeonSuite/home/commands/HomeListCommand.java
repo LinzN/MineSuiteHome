@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.home.Homeplugin;
-import de.nlinz.xeonSuite.home.database.ConnectionInject;
+import de.nlinz.xeonSuite.home.database.HomeSqlActions;
 
 public class HomeListCommand implements CommandExecutor {
 	public ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
@@ -33,7 +33,7 @@ public class HomeListCommand implements CommandExecutor {
 					if (sender instanceof Player) {
 						Player p = (Player) sender;
 
-						HashMap<String, String> list = ConnectionInject.getHomes(p.getUniqueId());
+						HashMap<String, String> list = HomeSqlActions.getHomes(p.getUniqueId());
 						List<String> homename = new ArrayList<String>();
 						List<String> servername = new ArrayList<String>();
 

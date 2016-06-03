@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.bukkit.utils.LocationUtil;
-import de.nlinz.xeonSuite.home.database.HomeHASHDB;
+import de.nlinz.xeonSuite.home.database.HomeDataTable;
 
 public class HOStreamInApi {
 
@@ -49,14 +49,14 @@ public class HOStreamInApi {
 
 		} else {
 
-			HomeHASHDB.pendingHomeLocations.put(player, t);
+			HomeDataTable.pendingHomeLocations.put(player, t);
 
 			// clear pending teleport if they dont connect
 			Bukkit.getScheduler().runTaskLaterAsynchronously(XeonSuiteBukkit.getInstance(), new Runnable() {
 				@Override
 				public void run() {
-					if (HomeHASHDB.pendingHomeLocations.containsKey(player)) {
-						HomeHASHDB.pendingHomeLocations.remove(player);
+					if (HomeDataTable.pendingHomeLocations.containsKey(player)) {
+						HomeDataTable.pendingHomeLocations.remove(player);
 					}
 				}
 			}, 100L);

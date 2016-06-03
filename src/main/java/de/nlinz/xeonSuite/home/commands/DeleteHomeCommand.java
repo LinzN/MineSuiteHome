@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.home.Homeplugin;
-import de.nlinz.xeonSuite.home.database.ConnectionInject;
+import de.nlinz.xeonSuite.home.database.HomeSqlActions;
 
 public class DeleteHomeCommand implements CommandExecutor {
 	public ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
@@ -32,7 +32,7 @@ public class DeleteHomeCommand implements CommandExecutor {
 						if ((args.length == 1)) {
 							homeName = args[0].toLowerCase();
 						}
-						ConnectionInject.delHome(player.getUniqueId(), homeName);
+						HomeSqlActions.delHome(player.getUniqueId(), homeName);
 						sender.sendMessage(ChatColor.GREEN + "Das Home " + ChatColor.YELLOW + homeName + ChatColor.GREEN
 								+ " wurde entfernt.");
 					}

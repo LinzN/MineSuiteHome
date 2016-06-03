@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
 import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.home.Homeplugin;
-import de.nlinz.xeonSuite.home.database.ConnectionInject;
+import de.nlinz.xeonSuite.home.database.HomeSqlActions;
 
 public class SetHomeCommand implements CommandExecutor {
 	public ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
@@ -62,14 +62,14 @@ public class SetHomeCommand implements CommandExecutor {
 						if (args.length == 1) {
 							homeName = args[0].toLowerCase();
 						}
-						if (!ConnectionInject.isHome(player.getUniqueId(), homeName)) {
-							if (ConnectionInject.getHomes(player.getUniqueId()).size() >= limit) {
+						if (!HomeSqlActions.isHome(player.getUniqueId(), homeName)) {
+							if (HomeSqlActions.getHomes(player.getUniqueId()).size() >= limit) {
 								sender.sendMessage(ChatColor.RED + "Du kannst nicht mehr als " + ChatColor.GOLD + limit
 										+ ChatColor.RED + " Homes setzen!");
 								return;
 							}
 						}
-						ConnectionInject.setHome(player.getUniqueId(), homeName, server, world, x, y, z, yaw, pitch);
+						HomeSqlActions.setHome(player.getUniqueId(), homeName, server, world, x, y, z, yaw, pitch);
 						sender.sendMessage(ChatColor.GREEN + "Du hast das Home " + ChatColor.YELLOW + homeName
 								+ ChatColor.GREEN + " gesetzt!");
 

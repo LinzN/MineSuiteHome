@@ -6,7 +6,7 @@ import java.util.HashSet;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class HomeHASHDB {
+public class HomeDataTable {
 	public static HashMap<String, Player> pendingHome = new HashMap<String, Player>();
 	public static HashMap<String, Location> pendingHomeLocations = new HashMap<String, Location>();
 	public static HashSet<Player> ignoreHome = new HashSet<Player>();

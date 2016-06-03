@@ -7,7 +7,6 @@ import de.nlinz.xeonSuite.home.commands.DeleteHomeCommand;
 import de.nlinz.xeonSuite.home.commands.HomeCommand;
 import de.nlinz.xeonSuite.home.commands.HomeListCommand;
 import de.nlinz.xeonSuite.home.commands.SetHomeCommand;
-import de.nlinz.xeonSuite.home.database.MineHomeDB;
 import de.nlinz.xeonSuite.home.listener.HomeListener;
 import de.nlinz.xeonSuite.home.listener.XeonHome;
 
@@ -18,9 +17,6 @@ public class Homeplugin extends JavaPlugin {
 	public void onEnable() {
 		inst = this;
 
-		if (MineHomeDB.create()) {
-			// someting
-		}
 		loadCommands();
 		XeonSocketClientManager.registerDataListener(new XeonHome());
 		getServer().getPluginManager().registerEvents(new HomeListener(), this);
