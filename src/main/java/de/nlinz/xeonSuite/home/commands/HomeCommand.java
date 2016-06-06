@@ -46,33 +46,34 @@ public class HomeCommand implements CommandExecutor {
 										String.valueOf(XeonSuiteBukkit.getWarmUpTime())));
 								Homeplugin.inst().getServer().getScheduler().runTaskLater(Homeplugin.inst(),
 										new Runnable() {
-									@Override
-									public void run() {
-										String homelName = "home";
-										if ((args.length == 1)) {
-											homelName = args[0].toLowerCase();
-										}
-										Location loc = HomeDataTable.lastHomeLocation.get(player);
-										HomeDataTable.lastHomeLocation.remove(player);
-										if ((loc != null) && (loc.getBlock().equals(player.getLocation().getBlock()))) {
-											List<String> list = HomeSqlActions.getHome(player.getUniqueId(),
-													homelName);
-											String world = list.get(1);
-											String server = list.get(2);
-											double x = Double.parseDouble(list.get(3));
-											double y = Double.parseDouble(list.get(4));
-											double z = Double.parseDouble(list.get(5));
-											float yaw = Float.parseFloat(list.get(6));
-											float pitch = Float.parseFloat(list.get(7));
-											HOStreamOutApi.sendTeleportToHomeOut(player.getName(), server, world, x, y,
-													z, yaw, pitch);
-											return;
-										} else {
-											player.sendMessage(GlobalMessageDB.TELEPORT_MOVE_CANCEL);
+											@Override
+											public void run() {
+												String homelName = "home";
+												if ((args.length == 1)) {
+													homelName = args[0].toLowerCase();
+												}
+												Location loc = HomeDataTable.lastHomeLocation.get(player);
+												HomeDataTable.lastHomeLocation.remove(player);
+												if ((loc != null)
+														&& (loc.getBlock().equals(player.getLocation().getBlock()))) {
+													List<String> list = HomeSqlActions.getHome(player.getUniqueId(),
+															homelName);
+													String world = list.get(1);
+													String server = list.get(2);
+													double x = Double.parseDouble(list.get(3));
+													double y = Double.parseDouble(list.get(4));
+													double z = Double.parseDouble(list.get(5));
+													float yaw = Float.parseFloat(list.get(6));
+													float pitch = Float.parseFloat(list.get(7));
+													HOStreamOutApi.sendTeleportToHomeOut(player.getName(), server,
+															world, x, y, z, yaw, pitch);
+													return;
+												} else {
+													player.sendMessage(GlobalMessageDB.TELEPORT_MOVE_CANCEL);
 
-										}
-									}
-								}, 20L * XeonSuiteBukkit.getWarmUpTime());
+												}
+											}
+										}, 20L * XeonSuiteBukkit.getWarmUpTime());
 							} else {
 								List<String> list = HomeSqlActions.getHome(player.getUniqueId(), homeName);
 								String world = list.get(1);
