@@ -17,54 +17,54 @@ commands:
     description: Delete a home
 
 permissions:
-    cookieApi.home.team:
+    xeonSuite.home.team:
         description: Alle Permissions
         children:
-            cookieApi.home.limit.admin: true
-            cookieApi.home.user: true
-    cookieApi.home.user:
+            xeonSuite.home.limit.admin: true
+            xeonSuite.home.user: true
+    xeonSuite.home.user:
         description: Alle User Permissions
         children:
-            cookieApi.home.home: true
-            cookieApi.home.sethome: true
-            cookieApi.home.homes: true
-            cookieApi.home.delhome: true
-    cookieApi.home.home:
+            xeonSuite.home.home: true
+            xeonSuite.home.sethome: true
+            xeonSuite.home.homes: true
+            xeonSuite.home.delhome: true
+    xeonSuite.home.home:
         description: Teleport to home
         default: op
-    cookieApi.home.sethome:
+    xeonSuite.home.sethome:
         description: Teleport to home
         default: op
-    cookieApi.home.homes:
+    xeonSuite.home.homes:
         description: Teleport to home
         default: op
-    cookieApi.home.delhome:
+    xeonSuite.home.delhome:
         description: Teleport to home
         default: op
-    cookieApi.home.limit.admin:
+    xeonSuite.home.limit.admin:
         description: Homes limit
         default: op
-    cookieApi.home.limit.2:
+    xeonSuite.home.limit.2:
         description: Homes limit
         default: op
-    cookieApi.home.limit.3:
+    xeonSuite.home.limit.3:
         description: Homes limit
         default: op
-    cookieApi.home.limit.4:
+    xeonSuite.home.limit.4:
         description: Homes limit
         default: op
-    cookieApi.home.limit.5:
+    xeonSuite.home.limit.5:
         description: Homes limit
         default: op
-    cookieApi.home.limit.6:
+    xeonSuite.home.limit.6:
         description: Homes limit
         default: op
-    cookieApi.home.limit.7:
+    xeonSuite.home.limit.7:
         description: Homes limit
         default: op
-    cookieApi.home.limit.8:
+    xeonSuite.home.limit.8:
         description: Homes limit
         default: op
-    cookieApi.home.limit.9:
+    xeonSuite.home.limit.9:
         description: Homes limit
         default: op

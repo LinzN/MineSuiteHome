@@ -26,29 +26,29 @@ public class SetHomeCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmnd, String label, final String[] args) {
 		final Player player = (Player) sender;
-		if (player.hasPermission("cookieApi.home.sethome")) {
+		if (player.hasPermission("xeonSuite.home.sethome")) {
 			this.executorServiceCommands.submit(new Runnable() {
 				@Override
 				public void run() {
 					if (sender instanceof Player) {
 						int limit = 1;
-						if (player.hasPermission("cookieApi.home.limit.admin")) {
+						if (player.hasPermission("xeonSuite.home.limit.admin")) {
 							limit = 90000;
-						} else if (player.hasPermission("cookieApi.home.limit.9")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.9")) {
 							limit = 9;
-						} else if (player.hasPermission("cookieApi.home.limit.8")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.8")) {
 							limit = 8;
-						} else if (player.hasPermission("cookieApi.home.limit.7")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.7")) {
 							limit = 7;
-						} else if (player.hasPermission("cookieApi.home.limit.6")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.6")) {
 							limit = 6;
-						} else if (player.hasPermission("cookieApi.home.limit.5")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.5")) {
 							limit = 5;
-						} else if (player.hasPermission("cookieApi.home.limit.4")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.4")) {
 							limit = 4;
-						} else if (player.hasPermission("cookieApi.home.limit.3")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.3")) {
 							limit = 3;
-						} else if (player.hasPermission("cookieApi.home.limit.2")) {
+						} else if (player.hasPermission("xeonSuite.home.limit.2")) {
 							limit = 2;
 						}
 						String homeName = "home";

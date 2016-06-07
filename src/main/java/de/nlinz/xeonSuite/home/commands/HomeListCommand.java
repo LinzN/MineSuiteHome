@@ -28,7 +28,7 @@ public class HomeListCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		final Player player = (Player) sender;
-		if (player.hasPermission("cookieApi.home.homes")) {
+		if (player.hasPermission("xeonSuite.home.homes")) {
 			this.executorServiceCommands.submit(new Runnable() {
 				@Override
 				public void run() {

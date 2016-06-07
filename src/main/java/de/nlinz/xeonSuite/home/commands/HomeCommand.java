@@ -30,7 +30,7 @@ public class HomeCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		final Player player = (Player) sender;
-		if (player.hasPermission("cookieApi.home.home")) {
+		if (player.hasPermission("xeonSuite.home.home")) {
 			this.executorServiceCommands.submit(new Runnable() {
 				@Override
 				public void run() {
@@ -42,7 +42,7 @@ public class HomeCommand implements CommandExecutor {
 						}
 
 						if (HomeSqlActions.isHome(player.getUniqueId(), homeName)) {
-							if (!player.hasPermission("cookieApi.bypass")) {
+							if (!player.hasPermission("xeonSuite.bypass")) {
 								HomeDataTable.lastHomeLocation.put(player, player.getLocation());
 								player.sendMessage(GlobalLanguage.TELEPORT_TIMER.replace("{TIME}",
 										String.valueOf(XeonSuiteBukkit.getWarmUpTime())));
