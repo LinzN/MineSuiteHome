@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
-import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
+import de.nlinz.xeonSuite.bukkit.utils.languages.GlobalLanguage;
 import de.nlinz.xeonSuite.home.Homeplugin;
 import de.nlinz.xeonSuite.home.database.HomeSqlActions;
 
@@ -23,10 +23,12 @@ public class SetHomeCommand implements CommandExecutor {
 	public SetHomeCommand(Homeplugin instance) {
 	}
 
+	@Override
 	public boolean onCommand(final CommandSender sender, Command cmnd, String label, final String[] args) {
 		final Player player = (Player) sender;
 		if (player.hasPermission("cookieApi.home.sethome")) {
 			this.executorServiceCommands.submit(new Runnable() {
+				@Override
 				public void run() {
 					if (sender instanceof Player) {
 						int limit = 1;
@@ -78,7 +80,7 @@ public class SetHomeCommand implements CommandExecutor {
 				}
 			});
 		} else {
-			sender.sendMessage(GlobalMessageDB.NO_PERMISSIONS);
+			sender.sendMessage(GlobalLanguage.NO_PERMISSIONS);
 		}
 		return false;
 	}

@@ -7,8 +7,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
-import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.bukkit.utils.LocationUtil;
+import de.nlinz.xeonSuite.bukkit.utils.languages.HomeLanguage;
 import de.nlinz.xeonSuite.bukkit.utils.tables.HomeDataTable;
 
 public class HOStreamInApi {
@@ -33,7 +33,7 @@ public class HOStreamInApi {
 					Location l = LocationUtil.getSafeDestination(p, t);
 					if (l != null) {
 						p.teleport(l);
-						p.sendMessage(GlobalMessageDB.Teleport_Home);
+						p.sendMessage(HomeLanguage.Teleport_Home);
 						return;
 					} else {
 						p.sendMessage(ChatColor.RED + "Unable to find a safe location for teleport.");
@@ -43,7 +43,7 @@ public class HOStreamInApi {
 				}
 			} else {
 				p.teleport(t);
-				p.sendMessage(GlobalMessageDB.Teleport_Home);
+				p.sendMessage(HomeLanguage.Teleport_Home);
 				return;
 			}
 

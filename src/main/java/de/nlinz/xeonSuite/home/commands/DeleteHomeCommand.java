@@ -10,7 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
+import de.nlinz.xeonSuite.bukkit.utils.languages.GlobalLanguage;
 import de.nlinz.xeonSuite.home.Homeplugin;
 import de.nlinz.xeonSuite.home.database.HomeSqlActions;
 
@@ -21,10 +21,12 @@ public class DeleteHomeCommand implements CommandExecutor {
 	public DeleteHomeCommand(Homeplugin instance) {
 	}
 
+	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		final Player player = (Player) sender;
 		if (player.hasPermission("cookieApi.home.delhome")) {
 			this.executorServiceCommands.submit(new Runnable() {
+				@Override
 				public void run() {
 					if (sender instanceof Player) {
 						Player player = (Player) sender;
@@ -39,7 +41,7 @@ public class DeleteHomeCommand implements CommandExecutor {
 				}
 			});
 		} else {
-			sender.sendMessage(GlobalMessageDB.NO_PERMISSIONS);
+			sender.sendMessage(GlobalLanguage.NO_PERMISSIONS);
 		}
 		return false;
 	}

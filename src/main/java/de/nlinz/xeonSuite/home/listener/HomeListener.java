@@ -8,8 +8,8 @@ import org.bukkit.event.Listener;
 import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.bukkit.utils.languages.HomeLanguage;
 import de.nlinz.xeonSuite.bukkit.utils.tables.HomeDataTable;
-import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 
 public class HomeListener implements Listener {
 
@@ -38,7 +38,7 @@ public class HomeListener implements Listener {
 			@Override
 			public void run() {
 				HomeDataTable.ignoreHome.remove(p);
-				p.sendMessage(GlobalMessageDB.Teleport_Home);
+				p.sendMessage(HomeLanguage.Teleport_Home);
 			}
 		}, 20);
 

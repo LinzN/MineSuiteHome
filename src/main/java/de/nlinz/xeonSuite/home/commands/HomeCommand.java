@@ -12,8 +12,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.nlinz.xeonSuite.bukkit.XeonSuiteBukkit;
+import de.nlinz.xeonSuite.bukkit.utils.languages.GlobalLanguage;
 import de.nlinz.xeonSuite.bukkit.utils.tables.HomeDataTable;
-import de.nlinz.xeonSuite.bukkit.GlobalMessageDB;
 import de.nlinz.xeonSuite.home.Homeplugin;
 import de.nlinz.xeonSuite.home.api.HOStreamOutApi;
 import de.nlinz.xeonSuite.home.database.HomeSqlActions;
@@ -27,10 +27,12 @@ public class HomeCommand implements CommandExecutor {
 
 	}
 
+	@Override
 	public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
 		final Player player = (Player) sender;
 		if (player.hasPermission("cookieApi.home.home")) {
 			this.executorServiceCommands.submit(new Runnable() {
+				@Override
 				public void run() {
 					if (sender instanceof Player) {
 
@@ -42,7 +44,7 @@ public class HomeCommand implements CommandExecutor {
 						if (HomeSqlActions.isHome(player.getUniqueId(), homeName)) {
 							if (!player.hasPermission("cookieApi.bypass")) {
 								HomeDataTable.lastHomeLocation.put(player, player.getLocation());
-								player.sendMessage(GlobalMessageDB.TELEPORT_TIMER.replace("{TIME}",
+								player.sendMessage(GlobalLanguage.TELEPORT_TIMER.replace("{TIME}",
 										String.valueOf(XeonSuiteBukkit.getWarmUpTime())));
 								Homeplugin.inst().getServer().getScheduler().runTaskLater(Homeplugin.inst(),
 										new Runnable() {
@@ -69,7 +71,7 @@ public class HomeCommand implements CommandExecutor {
 															world, x, y, z, yaw, pitch);
 													return;
 												} else {
-													player.sendMessage(GlobalMessageDB.TELEPORT_MOVE_CANCEL);
+													player.sendMessage(GlobalLanguage.TELEPORT_MOVE_CANCEL);
 
 												}
 											}
@@ -97,7 +99,7 @@ public class HomeCommand implements CommandExecutor {
 				}
 			});
 		} else {
-			sender.sendMessage(GlobalMessageDB.NO_PERMISSIONS);
+			sender.sendMessage(GlobalLanguage.NO_PERMISSIONS);
 		}
 		return false;
 	}
