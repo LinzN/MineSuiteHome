@@ -1,5 +1,6 @@
 package de.nlinz.xeonSuite.home;
 
+import org.bstats.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.nlinz.javaSocket.client.api.XeonSocketClientManager;
@@ -20,6 +21,7 @@ public class Homeplugin extends JavaPlugin {
 		loadCommands();
 		XeonSocketClientManager.registerDataListener(new XeonHome());
 		getServer().getPluginManager().registerEvents(new HomeListener(), this);
+		new Metrics(this);
 	}
 
 	@Override
