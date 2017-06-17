@@ -1,5 +1,5 @@
 name: XeonSuiteHome
-version: ${project.version}.b${build.number}
+version: ${project.version}
 description: Homeplugin
 authors: [Kekshaus]
 main: de.nlinz.xeonSuite.home.Homeplugin
