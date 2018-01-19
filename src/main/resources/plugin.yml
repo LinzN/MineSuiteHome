@@ -1,10 +1,10 @@
-name: XeonSuiteHome
+name: MineSuiteHome
 version: ${project.version}
-description: Homeplugin
+description: Home module for MineSuiteCore
 authors: [Kekshaus]
-main: de.nlinz.xeonSuite.home.Homeplugin
+main: de.linzn.mineSuite.home.HomePlugin
 load: POSTWORLD
-depend: [XeonSuiteBukkit]
+depend: [MineSuiteCore]
 
 commands:
   sethome:
@@ -17,54 +17,54 @@ commands:
     description: Delete a home
 
 permissions:
-    xeonSuite.home.team:
+    mineSuite.home.team:
         description: Alle Permissions
         children:
-            xeonSuite.home.limit.admin: true
-            xeonSuite.home.user: true
-    xeonSuite.home.user:
+            mineSuite.home.limit.admin: true
+            mineSuite.home.user: true
+    mineSuite.home.user:
         description: Alle User Permissions
         children:
-            xeonSuite.home.home: true
-            xeonSuite.home.sethome: true
-            xeonSuite.home.homes: true
-            xeonSuite.home.delhome: true
-    xeonSuite.home.home:
+            mineSuite.home.home: true
+            mineSuite.home.sethome: true
+            mineSuite.home.homes: true
+            mineSuite.home.delhome: true
+    mineSuite.home.home:
         description: Teleport to home
         default: op
-    xeonSuite.home.sethome:
+    mineSuite.home.sethome:
         description: Teleport to home
         default: op
-    xeonSuite.home.homes:
+    mineSuite.home.homes:
         description: Teleport to home
         default: op
-    xeonSuite.home.delhome:
+    mineSuite.home.delhome:
         description: Teleport to home
         default: op
-    xeonSuite.home.limit.admin:
+    mineSuite.home.limit.admin:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.2:
+    mineSuite.home.limit.2:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.3:
+    mineSuite.home.limit.3:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.4:
+    mineSuite.home.limit.4:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.5:
+    mineSuite.home.limit.5:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.6:
+    mineSuite.home.limit.6:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.7:
+    mineSuite.home.limit.7:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.8:
+    mineSuite.home.limit.8:
         description: Homes limit
         default: op
-    xeonSuite.home.limit.9:
+    mineSuite.home.limit.9:
         description: Homes limit
         default: op
