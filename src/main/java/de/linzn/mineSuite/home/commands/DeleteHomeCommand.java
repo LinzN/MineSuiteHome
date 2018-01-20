@@ -13,8 +13,7 @@ package de.linzn.mineSuite.home.commands;
 
 import de.linzn.mineSuite.core.MineSuiteCorePlugin;
 import de.linzn.mineSuite.home.HomePlugin;
-import de.linzn.mineSuite.home.database.HomeSqlActions;
-import org.bukkit.ChatColor;
+import de.linzn.mineSuite.home.socket.JClientHomeOutput;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -38,14 +37,11 @@ public class DeleteHomeCommand implements CommandExecutor {
         if (player.hasPermission("mineSuite.home.delhome")) {
             this.executorServiceCommands.submit(() -> {
                 if (sender instanceof Player) {
-                    Player player1 = (Player) sender;
                     String homeName = "home";
                     if ((args.length == 1)) {
                         homeName = args[0].toLowerCase();
                     }
-                    HomeSqlActions.delHome(player1.getUniqueId(), homeName);
-                    sender.sendMessage(ChatColor.GREEN + "Das Home " + ChatColor.YELLOW + homeName + ChatColor.GREEN
-                            + " wurde entfernt.");
+                    JClientHomeOutput.sendHomeRemove(player.getUniqueId(), homeName);
                 }
             });
         } else {

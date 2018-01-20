@@ -13,8 +13,7 @@ package de.linzn.mineSuite.home.commands;
 
 import de.linzn.mineSuite.core.MineSuiteCorePlugin;
 import de.linzn.mineSuite.home.HomePlugin;
-import de.linzn.mineSuite.home.database.HomeSqlActions;
-import org.bukkit.ChatColor;
+import de.linzn.mineSuite.home.socket.JClientHomeOutput;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,7 +39,7 @@ public class SetHomeCommand implements CommandExecutor {
                 if (sender instanceof Player) {
                     int limit = 1;
                     if (player.hasPermission("mineSuite.home.limit.admin")) {
-                        limit = 90000;
+                        limit = 10;
                     } else if (player.hasPermission("mineSuite.home.limit.9")) {
                         limit = 9;
                     } else if (player.hasPermission("mineSuite.home.limit.8")) {
@@ -60,28 +59,10 @@ public class SetHomeCommand implements CommandExecutor {
                     }
                     String homeName = "home";
                     Location coords = player.getLocation();
-                    String server = MineSuiteCorePlugin.getInstance().getMineConfigs().generalConfig.BUNGEE_SERVER_NAME;
-                    String world = coords.getWorld().getName();
-                    Double x = coords.getX();
-                    Double y = coords.getY();
-                    Double z = coords.getZ();
-                    Float yaw = coords.getYaw();
-                    Float pitch = coords.getPitch();
-
                     if (args.length == 1) {
                         homeName = args[0].toLowerCase();
                     }
-                    if (!HomeSqlActions.isHome(player.getUniqueId(), homeName)) {
-                        if (HomeSqlActions.getHomes(player.getUniqueId()).size() >= limit) {
-                            sender.sendMessage(ChatColor.RED + "Du kannst nicht mehr als " + ChatColor.GOLD + limit
-                                    + ChatColor.RED + " Homes setzen!");
-                            return;
-                        }
-                    }
-                    HomeSqlActions.setHome(player.getUniqueId(), homeName, server, world, x, y, z, yaw, pitch);
-                    sender.sendMessage(ChatColor.GREEN + "Du hast das Home " + ChatColor.YELLOW + homeName
-                            + ChatColor.GREEN + " gesetzt!");
-
+                    JClientHomeOutput.sendHomeCreate(player.getUniqueId(), homeName, coords, limit);
                     return;
                 }
             });
