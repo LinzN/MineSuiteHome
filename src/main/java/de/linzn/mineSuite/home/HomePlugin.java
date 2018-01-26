@@ -17,7 +17,6 @@ import de.linzn.mineSuite.home.commands.DeleteHomeCommand;
 import de.linzn.mineSuite.home.commands.HomeCommand;
 import de.linzn.mineSuite.home.commands.HomeListCommand;
 import de.linzn.mineSuite.home.commands.SetHomeCommand;
-import de.linzn.mineSuite.home.listener.HomeListener;
 import de.linzn.mineSuite.home.socket.JClientHomeListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,7 +32,6 @@ public class HomePlugin extends JavaPlugin {
         inst = this;
         loadCommands();
         MineSuiteCorePlugin.getInstance().getMineJSocketClient().jClientConnection1.registerIncomingDataListener("mineSuiteHome", new JClientHomeListener());
-        getServer().getPluginManager().registerEvents(new HomeListener(), this);
     }
 
     @Override
