@@ -12,7 +12,7 @@
 package de.linzn.mineSuite.home.commands;
 
 import de.linzn.mineSuite.core.MineSuiteCorePlugin;
-import de.linzn.mineSuite.core.database.hashDatabase.HomeDataTable;
+import de.linzn.mineSuite.core.database.hashDatabase.PendingTeleportsData;
 import de.linzn.mineSuite.home.HomePlugin;
 import de.linzn.mineSuite.home.socket.JClientHomeOutput;
 import org.bukkit.Location;
@@ -38,36 +38,30 @@ public class HomeCommand implements CommandExecutor {
         final Player player = (Player) sender;
         if (player.hasPermission("mineSuite.home.home")) {
             this.executorServiceCommands.submit(() -> {
-                if (sender instanceof Player) {
+                String homeName = "home";
+                if ((args.length == 1)) {
+                    homeName = args[0].toLowerCase();
+                }
+                final String finalHome = homeName;
 
-                    String homeName = "home";
-                    if ((args.length == 1)) {
-                        homeName = args[0].toLowerCase();
-                    }
-                    final String finalHome = homeName;
+                if (!player.hasPermission("mineSuite.bypass")) {
+                    PendingTeleportsData.checkMoveLocation.put(player.getUniqueId(), player.getLocation());
+                    player.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.TELEPORT_TIMER.replace("{TIME}",
+                            String.valueOf(MineSuiteCorePlugin.getInstance().getMineConfigs().generalConfig.TELEPORT_WARMUP)));
+                    HomePlugin.inst().getServer().getScheduler().runTaskLater(HomePlugin.inst(),
+                            () -> {
+                                Location loc = PendingTeleportsData.checkMoveLocation.get(player.getUniqueId());
+                                PendingTeleportsData.checkMoveLocation.remove(player.getUniqueId());
+                                if ((loc != null)
+                                        && (loc.getBlock().equals(player.getLocation().getBlock()))) {
+                                    JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome);
+                                } else {
+                                    player.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.TELEPORT_MOVE_CANCEL);
 
-                    if (!player.hasPermission("mineSuite.bypass")) {
-                        HomeDataTable.lastHomeLocation.put(player, player.getLocation());
-                        player.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.TELEPORT_TIMER.replace("{TIME}",
-                                String.valueOf(MineSuiteCorePlugin.getInstance().getMineConfigs().generalConfig.TELEPORT_WARMUP)));
-                        HomePlugin.inst().getServer().getScheduler().runTaskLater(HomePlugin.inst(),
-                                () -> {
-                                    Location loc = HomeDataTable.lastHomeLocation.get(player);
-                                    HomeDataTable.lastHomeLocation.remove(player);
-                                    if ((loc != null)
-                                            && (loc.getBlock().equals(player.getLocation().getBlock()))) {
-                                        JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome);
-                                        return;
-                                    } else {
-                                        player.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.TELEPORT_MOVE_CANCEL);
-
-                                    }
-                                }, 20L * MineSuiteCorePlugin.getInstance().getMineConfigs().generalConfig.TELEPORT_WARMUP);
-                    } else {
-                        JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome);
-                        return;
-
-                    }
+                                }
+                            }, 20L * MineSuiteCorePlugin.getInstance().getMineConfigs().generalConfig.TELEPORT_WARMUP);
+                } else {
+                    JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome);
                 }
             });
         } else {

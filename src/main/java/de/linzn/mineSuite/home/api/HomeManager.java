@@ -13,7 +13,7 @@ package de.linzn.mineSuite.home.api;
 
 
 import de.linzn.mineSuite.core.MineSuiteCorePlugin;
-import de.linzn.mineSuite.core.database.hashDatabase.HomeDataTable;
+import de.linzn.mineSuite.core.database.hashDatabase.PendingTeleportsData;
 import de.linzn.mineSuite.core.utils.LocationUtil;
 import de.linzn.mineSuite.home.HomePlugin;
 import org.bukkit.Bukkit;
@@ -22,9 +22,11 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public class HomeManager {
 
-    public static void teleportToHome(final String player, String world, double x, double y, double z, float yaw,
+    public static void teleportToHome(UUID playerUUID, String world, double x, double y, double z, float yaw,
                                       float pitch) {
         World w = Bukkit.getWorld(world);
         Location t;
@@ -35,7 +37,7 @@ public class HomeManager {
             w = Bukkit.getWorlds().get(0);
             t = w.getSpawnLocation();
         }
-        Player p = Bukkit.getPlayer(player);
+        Player p = Bukkit.getPlayer(playerUUID);
 
         if (p != null) {
             Bukkit.getScheduler().runTask(HomePlugin.inst(), () -> {
@@ -60,13 +62,12 @@ public class HomeManager {
                 }
             });
         } else {
-
-            HomeDataTable.pendingHomeLocations.put(player, t);
+            PendingTeleportsData.pendingLocations.put(playerUUID, t);
 
             // clear pending teleport if they dont connect
             Bukkit.getScheduler().runTaskLaterAsynchronously(HomePlugin.inst(), () -> {
-                if (HomeDataTable.pendingHomeLocations.containsKey(player)) {
-                    HomeDataTable.pendingHomeLocations.remove(player);
+                if (PendingTeleportsData.pendingLocations.containsKey(playerUUID)) {
+                    PendingTeleportsData.pendingLocations.remove(playerUUID);
                 }
             }, 100L);
         }

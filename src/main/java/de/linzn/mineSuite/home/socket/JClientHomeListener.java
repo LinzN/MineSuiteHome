@@ -36,7 +36,8 @@ public class JClientHomeListener implements IncomingDataListener {
             }
             subChannel = in.readUTF();
             if (subChannel.equals("server_home_teleport-home")) {
-                HomeManager.teleportToHome(in.readUTF(), in.readUTF(), in.readDouble(), in.readDouble(),
+                UUID playerUUID = UUID.fromString(in.readUTF());
+                HomeManager.teleportToHome(playerUUID, in.readUTF(), in.readDouble(), in.readDouble(),
                         in.readDouble(), in.readFloat(), in.readFloat());
             }
 
