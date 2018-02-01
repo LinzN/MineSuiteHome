@@ -28,7 +28,7 @@ public class HomeSqlActions {
 
             Connection conn = manager.getConnection("MineSuiteHome");
             PreparedStatement sel = conn
-                    .prepareStatement("SELECT * FROM homes WHERE player = '" + uuid.toString().replace("-", "") + "';");
+                    .prepareStatement("SELECT * FROM module_home_homes WHERE player = '" + uuid.toString().replace("-", "") + "';");
             HashMap<String, String> list = new HashMap<String, String>();
             try {
                 ResultSet result = sel.executeQuery();
@@ -39,8 +39,8 @@ public class HomeSqlActions {
                         list.put(result.getString("home_name"), result.getString("server"));
                         i++;
                     }
+                    result.close();
                 }
-                result.close();
                 sel.close();
                 manager.release("MineSuiteHome", conn);
             } catch (SQLException e) {

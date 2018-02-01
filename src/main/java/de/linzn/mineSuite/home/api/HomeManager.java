@@ -12,7 +12,7 @@
 package de.linzn.mineSuite.home.api;
 
 
-import de.linzn.mineSuite.core.MineSuiteCorePlugin;
+import de.linzn.mineSuite.core.configurations.YamlFiles.GeneralLanguage;
 import de.linzn.mineSuite.core.database.hashDatabase.PendingTeleportsData;
 import de.linzn.mineSuite.core.utils.LocationUtil;
 import de.linzn.mineSuite.home.HomePlugin;
@@ -47,8 +47,7 @@ public class HomeManager {
                         Location l = LocationUtil.getSafeDestination(p, t);
                         if (l != null) {
                             p.teleport(l);
-                            p.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.Teleport_Home);
-                            return;
+                            p.sendMessage(GeneralLanguage.teleport_success);
                         } else {
                             p.sendMessage(ChatColor.RED + "Unable to find a safe location for teleport.");
                         }
@@ -57,8 +56,7 @@ public class HomeManager {
                     }
                 } else {
                     p.teleport(t);
-                    p.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.Teleport_Home);
-                    return;
+                    p.sendMessage(GeneralLanguage.teleport_success);
                 }
             });
         } else {

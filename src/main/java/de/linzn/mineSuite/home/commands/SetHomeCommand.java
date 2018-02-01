@@ -11,7 +11,7 @@
 
 package de.linzn.mineSuite.home.commands;
 
-import de.linzn.mineSuite.core.MineSuiteCorePlugin;
+import de.linzn.mineSuite.core.configurations.YamlFiles.GeneralLanguage;
 import de.linzn.mineSuite.home.HomePlugin;
 import de.linzn.mineSuite.home.socket.JClientHomeOutput;
 import org.bukkit.Location;
@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class SetHomeCommand implements CommandExecutor {
-    public ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
+    private ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>());
 
     public SetHomeCommand(HomePlugin instance) {
@@ -36,38 +36,35 @@ public class SetHomeCommand implements CommandExecutor {
         final Player player = (Player) sender;
         if (player.hasPermission("mineSuite.home.sethome")) {
             this.executorServiceCommands.submit(() -> {
-                if (sender instanceof Player) {
-                    int limit = 1;
-                    if (player.hasPermission("mineSuite.home.limit.admin")) {
-                        limit = 10;
-                    } else if (player.hasPermission("mineSuite.home.limit.9")) {
-                        limit = 9;
-                    } else if (player.hasPermission("mineSuite.home.limit.8")) {
-                        limit = 8;
-                    } else if (player.hasPermission("mineSuite.home.limit.7")) {
-                        limit = 7;
-                    } else if (player.hasPermission("mineSuite.home.limit.6")) {
-                        limit = 6;
-                    } else if (player.hasPermission("mineSuite.home.limit.5")) {
-                        limit = 5;
-                    } else if (player.hasPermission("mineSuite.home.limit.4")) {
-                        limit = 4;
-                    } else if (player.hasPermission("mineSuite.home.limit.3")) {
-                        limit = 3;
-                    } else if (player.hasPermission("mineSuite.home.limit.2")) {
-                        limit = 2;
-                    }
-                    String homeName = "home";
-                    Location coords = player.getLocation();
-                    if (args.length == 1) {
-                        homeName = args[0].toLowerCase();
-                    }
-                    JClientHomeOutput.sendHomeCreate(player.getUniqueId(), homeName, coords, limit);
-                    return;
+                int limit = 1;
+                if (player.hasPermission("mineSuite.home.limit.admin")) {
+                    limit = 10;
+                } else if (player.hasPermission("mineSuite.home.limit.9")) {
+                    limit = 9;
+                } else if (player.hasPermission("mineSuite.home.limit.8")) {
+                    limit = 8;
+                } else if (player.hasPermission("mineSuite.home.limit.7")) {
+                    limit = 7;
+                } else if (player.hasPermission("mineSuite.home.limit.6")) {
+                    limit = 6;
+                } else if (player.hasPermission("mineSuite.home.limit.5")) {
+                    limit = 5;
+                } else if (player.hasPermission("mineSuite.home.limit.4")) {
+                    limit = 4;
+                } else if (player.hasPermission("mineSuite.home.limit.3")) {
+                    limit = 3;
+                } else if (player.hasPermission("mineSuite.home.limit.2")) {
+                    limit = 2;
                 }
+                String homeName = "home";
+                Location coords = player.getLocation();
+                if (args.length == 1) {
+                    homeName = args[0].toLowerCase();
+                }
+                JClientHomeOutput.sendHomeCreate(player.getUniqueId(), homeName, coords, limit);
             });
         } else {
-            player.sendMessage(MineSuiteCorePlugin.getInstance().getMineConfigs().generalLanguage.NO_PERMISSIONS);
+            player.sendMessage(GeneralLanguage.global_NO_PERMISSIONS);
         }
         return false;
     }
