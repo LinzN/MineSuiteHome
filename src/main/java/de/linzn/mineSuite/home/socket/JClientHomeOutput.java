@@ -82,5 +82,20 @@ public class JClientHomeOutput {
 
     }
 
+    public static void sendGetHomesList(UUID playerUUID, int pageid) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+
+        try {
+            dataOutputStream.writeUTF("client_home_get-homes");
+            dataOutputStream.writeUTF(playerUUID.toString());
+            dataOutputStream.writeInt(pageid);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        MineSuiteCorePlugin.getInstance().getMineJSocketClient().jClientConnection1.writeOutput("mineSuiteHome", byteArrayOutputStream.toByteArray());
+
+    }
+
 
 }
