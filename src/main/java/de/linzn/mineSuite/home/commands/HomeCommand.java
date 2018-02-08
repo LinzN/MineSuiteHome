@@ -11,7 +11,6 @@
 
 package de.linzn.mineSuite.home.commands;
 
-import de.linzn.mineSuite.core.MineSuiteCorePlugin;
 import de.linzn.mineSuite.core.configurations.YamlFiles.GeneralLanguage;
 import de.linzn.mineSuite.core.database.hashDatabase.PendingTeleportsData;
 import de.linzn.mineSuite.home.HomePlugin;
@@ -29,10 +28,6 @@ public class HomeCommand implements CommandExecutor {
     private ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>());
 
-    public HomeCommand(HomePlugin instance) {
-
-    }
-
     @Override
     public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {
         final Player player = (Player) sender;
@@ -45,9 +40,9 @@ public class HomeCommand implements CommandExecutor {
                         homeName = args[0].toLowerCase();
                     }
                     final String finalHome = homeName;
-                    player.sendMessage(GeneralLanguage.teleport_TELEPORT_TIMER);
-                    HomePlugin.inst().getServer().getScheduler().runTaskLaterAsynchronously(HomePlugin.inst(),
-                            () -> JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome), (long) MineSuiteCorePlugin.getInstance().getMineConfigs().generalConfig.TELEPORT_WARMUP);
+                    //player.sendMessage(GeneralLanguage.teleport_TELEPORT_TIMER);
+                    HomePlugin.inst().getServer().getScheduler().runTaskAsynchronously(HomePlugin.inst(),
+                            () -> JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome));
                 });
             } else {
                 player.sendMessage(GeneralLanguage.global_COMMAND_PENDING);

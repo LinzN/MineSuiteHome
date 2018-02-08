@@ -12,7 +12,6 @@
 package de.linzn.mineSuite.home.commands;
 
 import de.linzn.mineSuite.core.configurations.YamlFiles.GeneralLanguage;
-import de.linzn.mineSuite.home.HomePlugin;
 import de.linzn.mineSuite.home.socket.JClientHomeOutput;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -27,9 +26,6 @@ import java.util.concurrent.TimeUnit;
 public class DeleteHomeCommand implements CommandExecutor {
     private ThreadPoolExecutor executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>());
-
-    public DeleteHomeCommand(HomePlugin instance) {
-    }
 
     @Override
     public boolean onCommand(final CommandSender sender, Command cmd, String label, final String[] args) {

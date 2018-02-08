@@ -12,12 +12,10 @@
 package de.linzn.mineSuite.home;
 
 
-import de.linzn.mineSuite.core.MineSuiteCorePlugin;
 import de.linzn.mineSuite.home.commands.DeleteHomeCommand;
 import de.linzn.mineSuite.home.commands.HomeCommand;
 import de.linzn.mineSuite.home.commands.HomeListCommand;
 import de.linzn.mineSuite.home.commands.SetHomeCommand;
-import de.linzn.mineSuite.home.socket.JClientHomeListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class HomePlugin extends JavaPlugin {
@@ -31,18 +29,17 @@ public class HomePlugin extends JavaPlugin {
     public void onEnable() {
         inst = this;
         loadCommands();
-        MineSuiteCorePlugin.getInstance().getMineJSocketClient().jClientConnection1.registerIncomingDataListener("mineSuiteHome", new JClientHomeListener());
     }
 
     @Override
     public void onDisable() {
     }
 
-    public void loadCommands() {
-        getCommand("home").setExecutor(new HomeCommand(this));
-        getCommand("sethome").setExecutor(new SetHomeCommand(this));
-        getCommand("homes").setExecutor(new HomeListCommand(this));
-        getCommand("delhome").setExecutor(new DeleteHomeCommand(this));
+    private void loadCommands() {
+        getCommand("home").setExecutor(new HomeCommand());
+        getCommand("sethome").setExecutor(new SetHomeCommand());
+        getCommand("homes").setExecutor(new HomeListCommand());
+        getCommand("delhome").setExecutor(new DeleteHomeCommand());
     }
 
 }
