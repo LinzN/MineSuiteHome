@@ -40,7 +40,6 @@ public class HomeCommand implements CommandExecutor {
                         homeName = args[0].toLowerCase();
                     }
                     final String finalHome = homeName;
-                    //player.sendMessage(GeneralLanguage.teleport_TELEPORT_TIMER);
                     HomePlugin.inst().getServer().getScheduler().runTaskAsynchronously(HomePlugin.inst(),
                             () -> JClientHomeOutput.sendTeleportToHomeOut(player.getUniqueId(), finalHome));
                 });
