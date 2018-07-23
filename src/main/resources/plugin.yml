@@ -5,7 +5,7 @@ authors: [Kekshaus]
 main: de.linzn.mineSuite.home.HomePlugin
 load: POSTWORLD
 depend: [MineSuiteCore]
-
+api-version: 1.13
 commands:
   sethome:
     description: Set your home.
