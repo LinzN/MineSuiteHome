@@ -34,7 +34,7 @@ public class SetHomeCommand implements CommandExecutor {
             this.executorServiceCommands.submit(() -> {
                 int limit = 1;
                 if (player.hasPermission("mineSuite.home.limit.admin")) {
-                    limit = 10;
+                    limit = -1;
                 } else if (player.hasPermission("mineSuite.home.limit.9")) {
                     limit = 9;
                 } else if (player.hasPermission("mineSuite.home.limit.8")) {
